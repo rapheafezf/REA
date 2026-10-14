@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>J.A.R.V.I.S.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%2300e5ff' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2300e5ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grille" aria-hidden="true"></div>
+
+  <header class="hud-haut">
+    <div class="logo">J.A.R.V.I.S.</div>
+    <div class="hud-infos">
+      <span id="horloge">--:--:--</span>
+      <span id="etat-ia" class="pastille">IA…</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="reacteur-zone">
+      <button id="reacteur" class="reacteur" type="button" aria-label="Activer le micro">
+        <canvas id="canvas-reacteur" width="420" height="420"></canvas>
+      </button>
+      <p id="statut" class="statut" aria-live="polite">Touchez le réacteur ou appuyez sur Espace pour parler</p>
+      <div id="minuteur" class="minuteur" hidden>
+        <span class="minuteur-label">MINUTEUR</span>
+        <span id="minuteur-temps">00:00</span>
+        <button id="minuteur-stop" type="button" aria-label="Arrêter le minuteur">✕</button>
+      </div>
+    </section>
+
+    <section class="console">
+      <div id="journal" class="journal" aria-live="polite"></div>
+      <form id="formulaire" class="saisie" autocomplete="off">
+        <input id="entree" type="text" placeholder="Parlez ou tapez une commande… (ex. « quelle heure est-il ? »)" aria-label="Commande">
+        <button id="micro" type="button" class="btn-micro" aria-label="Micro">🎙</button>
+        <button type="submit" class="btn-envoyer">Envoyer</button>
+      </form>
+      <div class="options">
+        <label><input id="opt-voix" type="checkbox" checked> Voix</label>
+        <label><input id="opt-continu" type="checkbox"> Écoute continue (« Jarvis… »)</label>
+        <select id="choix-voix" aria-label="Voix"></select>
+      </div>
+    </section>
+  </main>
+
+  <script src="commands.js"></script>
+  <script src="reactor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
