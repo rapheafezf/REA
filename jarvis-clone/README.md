@@ -6,7 +6,19 @@ Aucune dépendance npm : un serveur Node de 150 lignes et du JavaScript natif c�
 
 ![Capture](tests/capture-conversation.png)
 
-## Lancer
+## Lancer sur votre PC
+
+1. Installez [Node.js](https://nodejs.org) (version 18 ou plus).
+2. Récupérez le code :
+   ```bash
+   git clone -b claude/festive-darwin-49zc0i https://github.com/rapheafezf/REA.git
+   ```
+3. *(Optionnel, pour l'IA)* créez `jarvis-clone/cle-api.txt` contenant votre clé `sk-ant-...`. Ce fichier est ignoré par git.
+4. Double-cliquez sur **`demarrer.bat`** (Windows) ou lancez **`./demarrer.sh`** (macOS/Linux). Le navigateur s'ouvre sur http://localhost:3000.
+
+Pour arrêter Jarvis, faites Ctrl+C dans la fenêtre du terminal.
+
+### À la main
 
 ```bash
 cd jarvis-clone
