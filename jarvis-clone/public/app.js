@@ -520,6 +520,9 @@
 
   if (!SR) btnMicro.title = 'Reconnaissance vocale non supportée par ce navigateur';
   ajouterMessage('jarvis', 'Bonjour Monsieur. J.A.R.V.I.S. en ligne. Touchez le réacteur pour me parler, ou tapez une commande.');
+  if (location.protocol === 'file:') {
+    ajouterMessage('jarvis', 'Attention Monsieur : cette page a été ouverte directement depuis le disque. Le micro et l\'IA ne fonctionnent pas ainsi. Lancez plutôt demarrer.bat (Windows) ou demarrer.sh (Mac/Linux), puis utilisez l\'adresse http://localhost:3000.');
+  }
 
   // Exposé pour les tests
   window.Jarvis = { traiter, parler, historique };

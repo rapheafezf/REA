@@ -151,11 +151,37 @@ const serveur = http.createServer((req, res) => {
   servirFichier(req, res);
 });
 
-if (require.main === module) {
-  serveur.listen(PORT, () => {
-    console.log(`J.A.R.V.I.S. en ligne : http://localhost:${PORT}`);
+function ouvrirNavigateur(url) {
+  const { spawn } = require('node:child_process');
+  const [cmd, args] =
+    process.platform === 'win32' ? ['cmd', ['/c', 'start', '""', url]]
+    : process.platform === 'darwin' ? ['open', [url]]
+    : ['xdg-open', [url]];
+  try {
+    spawn(cmd, args, { stdio: 'ignore', detached: true, windowsHide: true }).on('error', () => {}).unref();
+  } catch { /* pas de navigateur : l'URL est affichée dans la console */ }
+}
+
+// Démarre sur PORT ; si le port est déjà pris, essaie les 10 suivants.
+function demarrer(port, essais = 10) {
+  serveur.once('error', (e) => {
+    serveur.removeAllListeners('listening'); // sinon le rappel de l'essai raté se déclenche aussi
+    if (e.code === 'EADDRINUSE' && essais > 0) {
+      console.log(`Port ${port} déjà utilisé, essai sur ${port + 1}…`);
+      return demarrer(port + 1, essais - 1);
+    }
+    console.error('Impossible de démarrer le serveur :', e.message);
+    process.exit(1);
+  });
+  serveur.listen(port, '127.0.0.1', () => {
+    const url = `http://localhost:${port}`;
+    console.log(`J.A.R.V.I.S. en ligne : ${url}`);
     console.log(API_KEY ? `IA : Claude (${MODEL})` : 'IA : mode hors ligne (définissez ANTHROPIC_API_KEY pour activer Claude)');
+    console.log('Ouvrez cette adresse dans Chrome ou Edge. Ctrl+C pour arrêter.');
+    if (process.argv.includes('--ouvrir')) ouvrirNavigateur(url);
   });
 }
+
+if (require.main === module) demarrer(PORT);
 
 module.exports = { serveur, nettoyerHistorique, reponseHorsLigne };

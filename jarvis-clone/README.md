@@ -18,6 +18,19 @@ Aucune dépendance npm : un serveur Node de 150 lignes et du JavaScript natif c�
 
 Pour arrêter Jarvis, faites Ctrl+C dans la fenêtre du terminal.
 
+### Ça ne marche pas ?
+
+| Symptôme | Solution |
+|---|---|
+| La fenêtre noire se ferme tout de suite, ou affiche « Node.js est introuvable » | Installez Node.js (version LTS), **redémarrez le PC**, puis relancez `demarrer.bat`. |
+| « git n'est pas reconnu » | Sans git : sur https://github.com/rapheafezf/REA, bouton **Code → Download ZIP**, dézippez, puis ouvrez `jarvis-clone`. |
+| Page blanche, ou Jarvis dit « ouverte directement depuis le disque » | N'ouvrez pas `index.html` en double-cliquant dessus : lancez `demarrer.bat` et utilisez l'adresse affichée (`http://localhost:3000`). |
+| « Port 3000 déjà utilisé » | Rien à faire : Jarvis prend le port suivant (3001…). Utilisez l'adresse affichée. |
+| Le micro ne réagit pas, ou « Reconnaissance vocale indisponible (réseau) » | Utilisez **Chrome ou Edge** : Firefox, Brave et Opera ne gèrent pas la reconnaissance vocale. Il faut aussi une connexion internet, car Chrome envoie l'audio à ses serveurs. |
+| « Accès au micro refusé » | Cliquez sur l'icône 🔒 ou 🎙 à gauche de l'adresse → Micro → Autoriser, puis rechargez la page. |
+| Jarvis ne parle pas | Vérifiez que la case **Voix** est cochée et le son activé. Choisissez une autre voix dans la liste. Sous Windows, ajoutez la voix française dans Paramètres → Heure et langue → Voix. |
+| « IA : hors ligne » | Créez `cle-api.txt` avec votre clé `sk-ant-...` à côté de `demarrer.bat`, puis relancez. |
+
 ### À la main
 
 ```bash
